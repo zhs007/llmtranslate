@@ -23,4 +23,22 @@ python translate.py
 - Only empty or whitespace-only cells in target language columns will be translated and filled.
 - Each cell is saved immediately after translation to avoid data loss.
 
+## Run with Docker
+
+You can also run the translation script using Docker:
+
+```bash
+docker build -t llmtranslate .
+docker run --rm \
+  -e GOOGLE_API_KEY=your_gemini_api_key \
+  -e GEMINI_MODEL=gemini-pro \
+  -e TRANSLATE_INPUT_FILE=your_input.xlsx \
+  -v $(pwd):/app \
+  llmtranslate
+```
+
+- Replace `your_gemini_api_key` with your actual Gemini API key.
+- You can omit `GEMINI_MODEL` and `TRANSLATE_INPUT_FILE` to use their defaults.
+- The `-v $(pwd):/app` option mounts your current directory so input/output Excel files are accessible.
+
 ---
